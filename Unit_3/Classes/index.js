@@ -50,7 +50,7 @@ class item{
  */
 
     let itemZero = new item();
-    //console.log(itemZero); // returns an obj w/ set keys that holed undefined values.
+    //console.log(itemZero); // returns an obj w/ set keys that hold undefined values.
 
     let itemOne = new item('beans', 'canned', 0.89);
     //console.log(itemOne);
