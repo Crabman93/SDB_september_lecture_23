@@ -22,19 +22,55 @@ class Vehicle{
 
     engineOn() {
         console.log(`The ${this.color} ${this.make} ${this.model} turns on its engine.`);
+        this.engine_on = true;
     }
     
     engineOff() {
         console.log(`The ${this.color} ${this.make} ${this.model} turns off its engine.`);
+        this.engine_on = false;
     }
 }
 
-let newVehicle = new Vehicle('Ford', 'Fiesta', 'Red', 4);
-console.log(newVehicle);
+//let newVehicle = new Vehicle('Ford', 'Fiesta', 'Red', 4);
+//console.log(newVehicle);
+
+class Sedan extends Vehicle {
+    static parkedCar(make, model, wheels, color, tank) {
+        let engine_on = false;
+        return new Sedan(
+            make, model, wheels, color, engine_on, tank
+        );
+    }
+
+    constructor(make, model, no_wheels, color, engine_on, tank){
+        super(make, model, no_wheels, color, engine_on);
+        this.tank = tank;
+    }
+
+    drive(gallons){
+        if(this.engine_on){
+            console.log(`The ${this.color} ${this.model} is turned on.`)
+            if(this.tank > gallons){
+                console.log(`You drive around and use up ${gallons} gallons of gas.`);
+                this.tank -= gallons;
+            } else {
+                console.log(`There isn't enough gas in the ${this.make} to drive that many miles.`);
+            }
+        } else {
+            console.log(`The ${this.color} ${this.model} needs to be turned on.`)
+        }
+    }
+}
+
+const blueCivic = Sedan.parkedCar(
+    'Honda', 'Civic', 'Blue', 4, 12
+);
+blueCivic.engineOn();
+blueCivic.drive(13);
 
 /*  
     - Using the Vehicle Class
-        - Update the Vehicle Class to include a new propter called "engine_on". Have it hold no value.
+        - Update the Vehicle Class to include a new property called "engine_on". Have it hold no value.
         - Update both methods to change the value of "engine_on" to either "true" if the vehicle is on or "false" if the vehicle is off.
     - Create a Sedan class that extends form the Vehicle class
         - The constructor will use all the values from the Vehicle class and add a "tank".
@@ -53,3 +89,4 @@ console.log(newVehicle);
                                 - adjust the number of gallons current in the tank.
                             - If it does not: console.log "There isn't enough gas in the [make] to drive that many miles."
 */
+
